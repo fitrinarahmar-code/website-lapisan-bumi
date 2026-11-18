@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Lapisan Bumi - Belajar Seru</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#beranda"><img src="assets/globe.png" alt="Ilustrasi Bumi"><span>Lapisan<br><b>Bumi</b></span></a>
+  <nav>
+    <button class="nav-btn active" data-target="beranda"><img src="assets/home.png" alt=""> <span>Beranda</span></button>
+    <button class="nav-btn" data-target="materi"><img src="assets/book.png" alt=""> <span>Materi</span></button>
+    <button class="nav-btn" data-target="game"><img src="assets/gamepad.png" alt=""> <span>Game</span></button>
+    <button class="nav-btn" data-target="kuis"><img src="assets/quiz.png" alt=""> <span>Kuis</span></button>
+    <button class="nav-btn" data-target="profil"><img src="assets/profile.png" alt=""> <span>Profil</span></button>
+  </nav>
+  <button class="sound-btn" id="soundBtn" aria-label="Putar suara"><img src="assets/speaker.png" alt="Suara"></button>
+</header>
+<main>
+<section class="hero" id="beranda">
+  <img class="hero-boy" src="assets/boy.png" alt="Anak laki-laki sedang menunjuk Bumi">
+  <div class="hero-center"><h1>Lapisan <em>Bumi</em></h1><div class="ribbon">Yuk, jelajahi keajaiban bumi kita!</div><p>Belajar jadi lebih seru dan menyenangkan!</p><button class="main-btn" onclick="go('materi')">Ayo Mulai Belajar</button></div>
+  <img class="hero-girl" src="assets/girl.png" alt="Anak perempuan menyapa">
+  <img class="hero-earth" src="assets/earth-cutaway.png" alt="Ilustrasi penampang lapisan Bumi">
+</section>
+<h2 class="section-heading" id="materi">Materi Pembelajaran</h2>
+<section class="layers">
+  <article class="layer-card crust"><h3>Kerak Bumi</h3><img src="assets/mountains.png" alt="Pegunungan dan permukaan Bumi"><button data-layer="Kerak Bumi">Pelajari Sekarang <b>›</b></button></article>
+  <article class="layer-card mantle"><h3>Mantel Bumi</h3><img src="assets/volcano.png" alt="Gunung berapi dan magma"><button data-layer="Mantel Bumi">Pelajari Sekarang <b>›</b></button></article>
+  <article class="layer-card outer"><h3>Inti Luar</h3><img src="assets/core.png" alt="Ilustrasi inti luar Bumi"><button data-layer="Inti Luar">Pelajari Sekarang <b>›</b></button></article>
+  <article class="layer-card inner"><h3>Inti Dalam</h3><img src="assets/earth-cutaway.png" alt="Penampang bagian dalam Bumi"><button data-layer="Inti Dalam">Pelajari Sekarang <b>›</b></button></article>
+</section>
+<section class="features">
+  <article class="feature explore" id="eksplorasi"><h2>Eksplorasi Interaktif</h2><div class="feature-body"><img class="feature-image globe-spin" src="assets/globe.png" alt="Globe Bumi"><div><p>Putar Bumi dan lihat lapisan-lapisannya lebih dekat!</p><button onclick="explore()">Mulai Eksplorasi ›</button></div></div></article>
+  <article class="feature games" id="game"><h2>Game Edukasi</h2><div class="feature-body"><img class="feature-image" src="assets/volcano.png" alt="Gunung berapi"><div><p>Ayo main game untuk menguji pengetahuanmu!</p><button onclick="game()">Main Sekarang ›</button></div></div></article>
+  <article class="feature quiz" id="kuis"><h2>Kuis Seru</h2><div class="feature-body"><img class="feature-image" src="assets/clipboard.png" alt="Papan kuis"><div><p>Uji pemahamanmu dengan kuis menarik!</p><button onclick="startQuiz()">Mulai Kuis ›</button></div></div></article>
+  <article class="feature profile" id="profil"><h2>Profil Penjelajah</h2><div class="feature-body"><img class="feature-image explorer-image" src="assets/explorer.png" alt="Karakter penjelajah cilik"><div><p>Kenali lebih jauh tentang penjelajah kami!</p><button onclick="showProfile()">Lihat Profil ›</button></div></div></article>
+</section>
+<section class="fact"><div><h2>Fakta Menarik!</h2><p>Tahukah kamu? Mantel Bumi adalah lapisan paling tebal, dengan ketebalan sekitar 2.900 kilometer.</p></div><img src="assets/earth-cutaway.png" alt="Ilustrasi lapisan Bumi"></section>
+</main>
+<footer>Lapisan Bumi <span>•</span> Belajar <span>•</span> Jelajahi <span>•</span> Temukan</footer>
+<div class="modal-backdrop" id="modal"><div class="modal"><button class="close" id="close">×</button><img id="modalImage" src="assets/globe.png" alt="Ilustrasi"><h2 id="modalTitle">Ayo belajar!</h2><div id="modalBody"></div><button class="main-btn" id="ok">Mengerti</button></div></div>
+<script>
+const modal=document.getElementById('modal'),title=document.getElementById('modalTitle'),body=document.getElementById('modalBody'),modalImage=document.getElementById('modalImage');
+function openModal(t,html,img='globe.png'){title.textContent=t;body.innerHTML=html;modalImage.src='assets/'+img;modal.classList.add('show')}
+function closeModal(){modal.classList.remove('show')}document.getElementById('close').onclick=closeModal;document.getElementById('ok').onclick=closeModal;modal.onclick=e=>{if(e.target===modal)closeModal()};
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'center'})}
+document.querySelectorAll('.nav-btn').forEach(b=>b.onclick=()=>{document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');if(b.dataset.target==='profil')showProfile();else go(b.dataset.target)});
+const info={
+'Kerak Bumi':['Kerak Bumi','Lapisan paling luar dan paling tipis. Kerak menjadi tempat kita tinggal, membangun rumah, dan menemukan berbagai bentuk permukaan Bumi.','mountains.png'],
+'Mantel Bumi':['Mantel Bumi','Lapisan di bawah kerak Bumi. Mantel merupakan lapisan yang sangat tebal dan batuannya dapat bergerak sangat lambat.','volcano.png'],
+'Inti Luar':['Inti Luar','Bagian inti yang berbentuk cair, tersusun terutama dari besi dan nikel. Pergerakannya membantu membentuk medan magnet Bumi.','core.png'],
+'Inti Dalam':['Inti Dalam','Bagian paling dalam Bumi. Walaupun suhunya sangat tinggi, tekanan yang besar membuat bagian ini tetap padat.','earth-cutaway.png']};
+document.querySelectorAll('[data-layer]').forEach(b=>b.onclick=()=>{let d=info[b.dataset.layer];openModal(d[0],'<p>'+d[1]+'</p>',d[2])});
+function explore(){document.querySelector('.globe-spin').classList.toggle('spin');openModal('Eksplorasi Interaktif','<p>Bumi tersusun atas empat lapisan utama. Amati gambar penampang Bumi dan pilih setiap kartu materi untuk mengetahui ciri-cirinya.</p>','earth-cutaway.png')}
+function game(){openModal('Tantangan Susun Lapisan','<p>Urutkan lapisan Bumi dari bagian paling luar hingga paling dalam:</p><p><b>Kerak Bumi → Mantel Bumi → Inti Luar → Inti Dalam</b></p><p>Hafalkan urutannya, lalu coba kuis untuk menguji ingatanmu.</p>','volcano.png')}
+function showProfile(){openModal('Profil Penjelajah','<p>Selamat datang, Penjelajah Bumi! Website ini dibuat untuk membantu kamu mengenal struktur Bumi melalui materi, eksplorasi, permainan, dan kuis.</p>','explorer.png')}
+const qs=[['Lapisan paling luar Bumi disebut ...',['Kerak Bumi','Inti Dalam','Inti Luar'],0],['Lapisan Bumi yang paling tebal adalah ...',['Kerak Bumi','Mantel Bumi','Inti Dalam'],1],['Bagian inti Bumi yang berbentuk cair adalah ...',['Inti Dalam','Kerak Bumi','Inti Luar'],2]];
+function startQuiz(){let i=0,score=0;function draw(){if(i===qs.length){openModal('Kuis Selesai','<p>Nilaimu: <b>'+score+' dari '+qs.length+'</b></p><p>'+(score===3?'Hebat! Kamu sudah menguasai materi.':'Terus belajar dan coba lagi, ya!')+'</p>','clipboard.png');return}let q=qs[i];openModal('Pertanyaan '+(i+1)+' dari '+qs.length,'<p>'+q[0]+'</p><div class="answers">'+q[1].map((a,n)=>'<button class="answer" data-a="'+n+'">'+String.fromCharCode(65+n)+'. '+a+'</button>').join('')+'</div>','clipboard.png');body.querySelectorAll('[data-a]').forEach(x=>x.onclick=()=>{if(+x.dataset.a===q[2])score++;i++;draw()})}draw()}
+document.getElementById('soundBtn').onclick=()=>{if(!('speechSynthesis'in window)){openModal('Audio tidak tersedia','Browser ini belum mendukung suara.');return}let u=new SpeechSynthesisUtterance('Halo penjelajah! Selamat datang di dunia lapisan Bumi. Ayo belajar bersama!');u.lang='id-ID';speechSynthesis.cancel();speechSynthesis.speak(u)};
+</script>
+</body></html>
